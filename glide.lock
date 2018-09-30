@@ -1,0 +1,10 @@
+hash: 565840dbae754e02d89532f5692e3203d3bafe02bcb7895a26d10794d8f4423a
+updated: 2018-10-01T01:04:17.937357694+02:00
+imports:
+- name: github.com/spf13/cast
+  version: 8965335b8c7107321228e3e3702cab9832751bac
+- name: github.com/uthng/common
+  version: a8f3bf50de492df1fa23bf145a5f95155f302f85
+  subpackages:
+  - utils
+testImports: []
