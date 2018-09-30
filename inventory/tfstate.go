@@ -112,7 +112,7 @@ func parseResources(resources map[string]Resource) (HostVars, GroupHosts) {
 				//host = attrv
 				//}
 
-				if strings.HasSuffix(attrk, "host_name") {
+				if strings.HasSuffix(attrk, "host_name") || strings.HasSuffix(attrk, "hostname") {
 					hostname = attrv
 				}
 
