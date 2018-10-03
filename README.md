@@ -5,6 +5,9 @@
 
 **tf-inventory** considers Terraform outputs as host variables in Ansible. If the output is a `map`, then each element of the map will be considered as a host var distinct.
 
+Actually, the following providers are supported:
+- Vsphere
+
 ## Installation
 To use **tf-inventory**, you have to clone this repository and build it as following:
 ```shell
