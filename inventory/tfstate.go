@@ -101,26 +101,20 @@ func parseResources(resources map[string]Resource) (HostVars, GroupHosts) {
 
 	// Loop resources to find supported ones
 	for resk, resv := range resources {
-		if strings.HasPrefix(resk, "vsphere_virtual_machine.") {
-			vars := make(map[string]interface{})
-			hostname := ""
-			group := ""
+		vars := make(map[string]interface{})
+		hostname := ""
+		ip := ""
+		group := ""
 
-			// Loop attributes
-			for attrk, attrv := range resv.Primary.Attributes {
-				//if attrk == "name" {
-				//host = attrv
-				//}
+		// Parse according to type
+		if resv.Type == "vsphere_virtual_machine" {
+			hostname, ip = parseResourceVsphere(resv)
+		}
 
-				if strings.HasSuffix(attrk, "host_name") || strings.HasSuffix(attrk, "hostname") {
-					hostname = attrv
-				}
-
-				if strings.HasSuffix(attrk, "ipv4_address") {
-					vars["ansible_ssh_host"] = attrv
-				}
-			}
-
+		// Add to hostvars or grouphost only if resource is
+		// supported and return a hostname with its ip
+		if hostname != "" && ip != "" {
+			vars["ansible_ssh_host"] = ip
 			hostVars[hostname] = vars
 
 			// Get group name
@@ -138,6 +132,28 @@ func parseResources(resources map[string]Resource) (HostVars, GroupHosts) {
 	}
 
 	return hostVars, groupHosts
+}
+
+func parseResourceVsphere(res Resource) (string, string) {
+	hostname := ""
+	ip := ""
+
+	// Loop attributes
+	for attrk, attrv := range res.Primary.Attributes {
+		//if attrk == "name" {
+		//host = attrv
+		//}
+
+		if strings.HasSuffix(attrk, "host_name") || strings.HasSuffix(attrk, "hostname") {
+			hostname = attrv
+		}
+
+		if strings.HasSuffix(attrk, "ipv4_address") {
+			ip = attrv
+		}
+	}
+
+	return hostname, ip
 }
 
 func parseOutputs(outputs map[string]Output) map[string]interface{} {
