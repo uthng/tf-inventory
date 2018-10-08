@@ -80,13 +80,21 @@ func (t *TFState) Parse(tfs []byte) (HostVars, GroupHosts, error) {
 			hostVars[name] = vars
 		}
 
-		// Merge group hosts
-		for group, hosts := range ghRes {
-			g, ok := groupHosts[group]
-			if ok {
+		// if Path length > 1, it means that the current
+		// module is not a root module => resource not changed
+		// but module changed
+		if len(module.Path) > 1 {
+			group := module.Path[len(module.Path)-1]
+			for _, hosts := range ghRes {
+				g := groupHosts[group]
 				groupHosts[group] = append(g, hosts...)
-			} else {
-				groupHosts[group] = hosts
+			}
+		} else {
+			// Case "Root" module => different ressources
+			// Merge group hosts
+			for grp, hosts := range ghRes {
+				g := groupHosts[grp]
+				groupHosts[grp] = append(g, hosts...)
 			}
 		}
 	}
