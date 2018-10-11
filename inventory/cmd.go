@@ -6,6 +6,8 @@ import (
 	"io/ioutil"
 	"os"
 	"os/exec"
+
+	consul "github.com/hashicorp/consul/api"
 )
 
 // ExecCmd executes one of available commands: list, host and inventory.
@@ -22,6 +24,10 @@ func ExecCmd(cmd string, arg string, tfsFile string) (interface{}, error) {
 	tfBin := os.Getenv("TF_BIN")
 	tfDir := os.Getenv("TF_DIR")
 
+	consulURL, consulURLSet := os.LookupEnv("CONSUL_URL")
+	consulToken, _ := os.LookupEnv("CONSUL_TOKEN")
+	consulKey, consulKeySet := os.LookupEnv("CONSUL_KEY")
+
 	// If a tfstate is specified in commandline
 	if tfsFile != "" {
 		tfsBytes, err = readFile(tfsFile)
@@ -29,28 +35,38 @@ func ExecCmd(cmd string, arg string, tfsFile string) (interface{}, error) {
 			return nil, err
 		}
 	} else {
-		// Check env variables to do a 'terraform state pull'
-		if tfBin == "" {
-			tfBin = "terraform"
-		}
+		// Check if variables for Consul are set.
+		// If yes, we must use it. Otherwise, use TF_BIN & TF_DIR
+		// by default
+		if consulURLSet && consulKeySet {
+			tfsBytes, err = getTfStateFromConsul(consulURL, consulToken, consulKey)
+			if err != nil {
+				return nil, err
+			}
+		} else {
+			// Check env variables to do a 'terraform state pull'
+			if tfBin == "" {
+				tfBin = "terraform"
+			}
 
-		// Execute cmd
-		cmd := exec.Command("terraform", "state", "pull")
-		if tfDir != "" {
-			cmd.Dir = tfDir
-		}
+			// Execute cmd
+			cmd := exec.Command("terraform", "state", "pull")
+			if tfDir != "" {
+				cmd.Dir = tfDir
+			}
 
-		cmd.Stdout = &out
+			cmd.Stdout = &out
 
-		err = cmd.Run()
-		if err != nil {
-			return nil, fmt.Errorf("error `terraform state pull` in directory %s, %s", tfDir, err)
-		}
+			err = cmd.Run()
+			if err != nil {
+				return nil, fmt.Errorf("error `terraform state pull` in directory %s, %s", tfDir, err)
+			}
 
-		// read statefile contents
-		tfsBytes, err = ioutil.ReadAll(&out)
-		if err != nil {
-			return nil, err
+			// read statefile contents
+			tfsBytes, err = ioutil.ReadAll(&out)
+			if err != nil {
+				return nil, err
+			}
 		}
 	}
 
@@ -118,4 +134,26 @@ func cmdList(hv HostVars, gh GroupHosts) map[string]interface{} {
 
 func cmdHost(host string, hv HostVars) map[string]interface{} {
 	return hv[host].(map[string]interface{})
+}
+
+func getTfStateFromConsul(url, token, key string) ([]byte, error) {
+
+	config := consul.DefaultConfig()
+	config.Address = url
+	if token != "" {
+		config.Token = token
+	}
+
+	client, err := consul.NewClient(config)
+	if err != nil {
+		fmt.Println(err)
+		return nil, err
+	}
+
+	pair, _, err := client.KV().Get(key, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	return pair.Value, nil
 }
