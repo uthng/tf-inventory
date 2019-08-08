@@ -1,7 +1,7 @@
 test:
 	go test -v $(shell go list ./... | grep -v /vendor/)
 
-build: deps
+build: clean
 	gox -osarch="linux/amd64 windows/amd64 darwin/amd64" \
 	-output="releases/{{.OS}}_{{.Arch}}/tf-inventory" .
 
