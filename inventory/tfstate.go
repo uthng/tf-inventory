@@ -2,7 +2,7 @@ package inventory
 
 import (
 	"encoding/json"
-	//"fmt"
+	"fmt"
 	"strings"
 
 	"github.com/spf13/cast"
@@ -117,6 +117,8 @@ func parseResources(resources map[string]Resource) (HostVars, GroupHosts) {
 		// Parse according to type
 		if resv.Type == "vsphere_virtual_machine" {
 			hostname, ip = parseResourceVsphere(resv)
+		} else if resv.Type == "scaleway_server" {
+			hostname, ip = parseResourceScaleway(resv)
 		}
 
 		// Add to hostvars or grouphost only if resource is
