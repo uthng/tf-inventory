@@ -2,7 +2,7 @@ package inventory
 
 import (
 	"encoding/json"
-	"fmt"
+	//"fmt"
 	"strings"
 
 	"github.com/spf13/cast"
@@ -81,10 +81,14 @@ func (t *TFState) Parse(tfs []byte) (HostVars, GroupHosts, error) {
 		}
 
 		// if Path length > 1, it means that the current
-		// module is not a root module => resource not changed
-		// but module changed
+		// module is not a root module => tfstate generated uses module/submodule
+		// => 2nd element in Path correspond to the name of module declared
+		// in tf files with the following instruction:
+		// module "uthng-blog" {
+		// ....
+		// }
 		if len(module.Path) > 1 {
-			group := module.Path[len(module.Path)-1]
+			group := module.Path[1]
 			for _, hosts := range ghRes {
 				g := groupHosts[group]
 				groupHosts[group] = append(g, hosts...)
