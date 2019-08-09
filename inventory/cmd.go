@@ -73,17 +73,17 @@ func ExecCmd(cmd string, arg string, tfsFile string) (interface{}, error) {
 	// Parse tfstate
 	tfs := &TFState{}
 
-	hostvars, grouphosts, err := tfs.Parse(tfsBytes)
+	tfsParsed, err := tfs.Parse(tfsBytes)
 	if err != nil {
 		return nil, err
 	}
 
 	switch cmd {
 	case "list":
-		res := cmdList(hostvars, grouphosts)
+		res := cmdList(tfsParsed)
 		return res, nil
 	case "host":
-		res := cmdHost(arg, hostvars)
+		res := cmdHost(arg, tfsParsed.Hosts)
 		return res, nil
 	case "inventory":
 		return nil, nil
@@ -102,28 +102,28 @@ func readFile(filePath string) ([]byte, error) {
 	return ioutil.ReadFile(filePath)
 }
 
-func cmdList(hv HostVars, gh GroupHosts) map[string]interface{} {
+func cmdList(tfsParsed *TFStateParsed) map[string]interface{} {
 	inventory := make(map[string]interface{})
-	groups := []string{}
+	groupNames := []string{}
+
+	hosts := tfsParsed.Hosts
+	groups := tfsParsed.Groups
 
 	// Format group "_meta"
 	inventory["_meta"] = map[string]interface{}{
-		"hostvars": hv,
+		"hostvars": hosts,
 	}
 
 	// Format list of groups
-	for g, h := range gh {
-		inventory[g] = map[string]interface{}{
-			"hosts": h,
-		}
-
-		groups = append(groups, g)
+	for name, group := range groups {
+		inventory[name] = group
+		groupNames = append(groupNames, name)
 	}
 
 	// Format group "all"
-	groups = append(groups, "ungrouped")
+	groupNames = append(groupNames, "ungrouped")
 	inventory["all"] = map[string]interface{}{
-		"children": groups,
+		"children": groupNames,
 	}
 
 	// Format group "ungrouped"
@@ -132,8 +132,8 @@ func cmdList(hv HostVars, gh GroupHosts) map[string]interface{} {
 	return inventory
 }
 
-func cmdHost(host string, hv HostVars) map[string]interface{} {
-	return hv[host].(map[string]interface{})
+func cmdHost(host string, hosts Hosts) *Host {
+	return hosts[host]
 }
 
 func getTfStateFromConsul(url, token, key string) ([]byte, error) {
