@@ -1,3 +1,0 @@
-package: github.com/uthng/tf-inventory
-import:
-- package: github.com/uthng/common
