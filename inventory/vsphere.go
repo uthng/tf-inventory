@@ -9,33 +9,26 @@ import (
 // parseResourceVsphere loops primary attributes to find out
 // hostname & ip of server and by the way, add all these attributes
 // to Ansible hostvars list.
-func parseResourceScaleway(res Resource, tfsParsed *TFStateParsed) string {
+func parseResourceVsphere(res Resource, tfsParsed *TFStateParsed) string {
 	hostvars := make(map[string]interface{})
 	hostname := ""
-	publicIP := ""
-	privateIP := ""
+	ip := ""
 
 	// Loop attributes
 	for attrk, attrv := range res.Primary.Attributes {
-		if strings.HasSuffix(attrk, "name") {
+		if strings.HasSuffix(attrk, "host_name") || strings.HasSuffix(attrk, "hostname") {
 			hostname = attrv
 		}
 
-		if strings.HasSuffix(attrk, "public_ip") {
-			publicIP = attrv
-		}
-
-		if strings.HasSuffix(attrk, "private_ip") {
-			privateIP = attrv
+		if strings.HasSuffix(attrk, "ipv4_address") {
+			ip = attrv
 		}
 
 		hostvars[attrk] = attrv
 	}
 
-	if publicIP != "" {
-		hostvars["ansible_ssh_host"] = publicIP
-	} else {
-		hostvars["ansible_ssh_host"] = privateIP
+	if ip != "" {
+		hostvars["ansible_ssh_host"] = ip
 	}
 
 	if hostname != "" {
