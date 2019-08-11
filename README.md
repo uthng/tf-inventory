@@ -16,7 +16,7 @@ To use **tf-inventory**, you have to clone this repository and build it as follo
 ```shell
 # git clone https://github.com/uthng/tf-inventory
 # cd tf-inventory
-# make deps build
+# GO111MODULE=on make deps build
 # ./releases/<yourplatform>/tf-inventory
 ```
 
