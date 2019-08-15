@@ -23,6 +23,7 @@ github.com/mitchellh/mapstructure v1.1.2 h1:fmNYVwqnSfB9mZU6OS2O6GsXM+wcskZDuKQz
 github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
 github.com/spf13/cast v1.2.0 h1:HHl1DSRbEQN2i8tJmtS6ViPyHx35+p51amrdsiTCrkg=
 github.com/spf13/cast v1.2.0/go.mod h1:r2rcYCSwa1IExKTDiTfzaxqT2FNHs8hODu4LnUfgKEg=
+github.com/uthng/common v0.0.0-20180928203151-a8f3bf50de49 h1:azPsEivdN6q/UE2EN5jLUzdx+A27g1Wn2ACh8EFQIGw=
 github.com/uthng/common v0.0.0-20180928203151-a8f3bf50de49/go.mod h1:TX79IYpbuYUlrgC7VzJIQ0y0Y7V8wlq/VIFDl4Rn45k=
 github.com/uthng/tf-inventory v0.0.0-20181003220303-b6f64e4c897c h1:W7SCmo0xgqiuG6VYzhnWuhfWMW+lWLy+gIttSHAKOUI=
 github.com/uthng/tf-inventory v0.0.0-20181003220303-b6f64e4c897c/go.mod h1:ZiyZBZ+BG/O+o65evnkHQPsmK8K0SJqLRIy/F/1THXk=
