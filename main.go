@@ -33,7 +33,7 @@ func main() {
 		b, err := json.Marshal(res)
 		app.FatalIfError(err, "")
 
-		fmt.Fprintf(os.Stdout, string(b))
+		fmt.Fprintf(os.Stdout, "%s", string(b))
 		app.Terminate(nil)
 	}
 
@@ -44,7 +44,7 @@ func main() {
 		b, err := json.Marshal(res)
 		app.FatalIfError(err, "")
 
-		fmt.Fprintf(os.Stdout, string(b))
+		fmt.Fprintf(os.Stdout, "%s", string(b))
 		app.Terminate(nil)
 	}
 
