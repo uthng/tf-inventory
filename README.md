@@ -22,6 +22,7 @@ To use **tf-inventory**, you have to clone this repository and build it as follo
 
 ## Usage
 You can use **tf-inventory** alone or with ansible.
+
 #### CLI
 ```shell
 tf-inventory --help
@@ -37,11 +38,19 @@ Flags:
 Args:
   [<tfsfile>]  Terraform state file
 ```
-If the `tfsfile` is omitted,  **tf-inventory** will try to read `terraform.tfstate` in the current directory. If no file is found, it will try to execute the command `terraform state pull` to get using the information specified in the 2 following environment variables:
-- **TF_BIN**: path to folder containing `terraform` binary
-- **TF_DIR**: path to Terraform working folder.
 
-After all, it will return an error.
+**tf-inventory** gets the content of Terraform state file in 3 following ways in order:
+
+1. `tfsfile`: if it is specified, **tf-inventory** will read and parse its contents
+2. `consul`: if the following environment variables are specified, **tf-inventory** will get the tfstate content with the given key from Consul
+	- **CONSUL_URL:** Consul server's url
+	- **CONSUL_KEY:** Consul key containing tfstate
+	- **CONSUL_TOKEN:** Consul token to access to key
+3. `terraform`: if 2 above cases donot satisfy, **tf-inventory** will perform the command `terraform state pull` to generate tfstate instead using the following environment variables:
+	- **TF_BIN**: path to folder containing `terraform` binary
+	- **TF_DIR**: path to Terraform working folder.
+
+Otherwise, it will return an error.
 
 ##### Examples:
 Using `tfstate` argument:
