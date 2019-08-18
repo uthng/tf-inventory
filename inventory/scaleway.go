@@ -9,11 +9,14 @@ import (
 // parseResourceVsphere loops primary attributes to find out
 // hostname & ip of server and by the way, add all these attributes
 // to Ansible hostvars list.
-func parseResourceScaleway(res Resource, tfsParsed *TFStateParsed) string {
+func parseResourceScaleway(res Resource) *Host {
+	var host *Host
+
 	hostvars := make(map[string]interface{})
 	hostname := ""
 	publicIP := ""
 	privateIP := ""
+	host = nil
 
 	// Loop attributes
 	for attrk, attrv := range res.Primary.Attributes {
@@ -39,10 +42,11 @@ func parseResourceScaleway(res Resource, tfsParsed *TFStateParsed) string {
 	}
 
 	if hostname != "" {
-		tfsParsed.Hosts[hostname] = &Host{
+		host = &Host{
+			Name: hostname,
 			Vars: hostvars,
 		}
 	}
 
-	return hostname
+	return host
 }
