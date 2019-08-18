@@ -47,13 +47,16 @@ type Output struct {
 
 // Group represents an Ansible inventory group
 type Group struct {
+	Name  string                 `json:"-"`
 	Vars  map[string]interface{} `json:"vars"`
 	Hosts []string               `json:"hosts"`
 }
 
 // Host represents an Ansible inventory host
 type Host struct {
-	Vars map[string]interface{} `json:"vars"`
+	Name      string                 `json:"-"`
+	GroupName string                 `json:"-"`
+	Vars      map[string]interface{} `json:"vars"`
 }
 
 // Hosts is map representing a list of hosts
@@ -75,7 +78,7 @@ func (t *TFState) Parse(tfs []byte) (*TFStateParsed, error) {
 		Groups: make(Groups),
 	}
 
-	groupName := ""
+	//groupName := ""
 
 	err := json.Unmarshal(tfs, t)
 	if err != nil {
@@ -84,70 +87,117 @@ func (t *TFState) Parse(tfs []byte) (*TFStateParsed, error) {
 
 	// Loop modules
 	for _, module := range t.Modules {
-		// if Path length > 1, it means that the current
-		// module is not a root module => tfstate generated uses module/submodule
-		// => 2nd element in Path correspond to the name of module declared
-		// in tf files with the following instruction:
-		// module "uthng-blog" {
-		// ....
-		// }
-		// Case "Root" module => different ressources
-		// Merge group hosts
-		if len(module.Path) > 1 {
-			groupName = module.Path[1]
-		}
-
 		// Parse Module Resources
-		parseResources(groupName, module.Resources, tfsParsed)
+		//parseResources(groupName, module.Resources, tfsParsed)
 
 		// Parse Module Outputs
-		parseOutputs(groupName, module.Outputs, tfsParsed)
+		//parseOutputs(groupName, module.Outputs, tfsParsed)
+
+		hosts, groups := parseModule(module)
+
+		for name, host := range hosts {
+			tfsParsed.Hosts[name] = host
+		}
+
+		for name, group := range groups {
+			tfsParsed.Groups[name] = group
+		}
 	}
 
 	return tfsParsed, err
 }
 
 //////////////// PRIVATE FUNCTIONS ///////////////////////
-func parseResources(groupName string, resources map[string]Resource, tfsParsed *TFStateParsed) {
+func parseModule(module Module) (Hosts, Groups) {
+	groupvars := make(map[string]interface{})
+	groups := make(Groups)
+	groupName := ""
+
+	// if Path length > 1, it means that the current
+	// module is not a root module => tfstate generated uses module/submodule
+	// => 2nd element in Path correspond to the name of module declared
+	// in tf files with the following instruction:
+	// module "uthng-blog" {
+	// ....
+	// }
+	// Case "Root" module => different ressources
+	// Merge group hosts
+	if len(module.Path) > 1 {
+		groupName = module.Path[1]
+	}
+
+	hosts := parseResources(groupName, module.Resources)
+	if len(hosts) > 0 {
+		groupvars = parseOutputs(module.Outputs)
+	}
+
+	for _, host := range hosts {
+		group, ok := groups[host.GroupName]
+		if !ok {
+			group = &Group{
+				Name: host.GroupName,
+				Vars: groupvars,
+			}
+		}
+
+		group.Hosts = append(group.Hosts, host.Name)
+		groups[host.GroupName] = group
+	}
+
+	return hosts, groups
+}
+
+func parseResources(groupName string, resources map[string]Resource) Hosts {
+	hosts := make(Hosts)
+
 	// Loop resources to find supported ones
 	for resk, resv := range resources {
-		hostname := ""
-		groupname := groupName
+		//hostname := ""
+		var host *Host
+
+		host = nil
+		//groupname := groupName
 
 		// Parse according to type
 		if resv.Type == "vsphere_virtual_machine" {
-			hostname = parseResourceVsphere(resv, tfsParsed)
+			host = parseResourceVsphere(resv)
 		} else if resv.Type == "scaleway_server" {
-			hostname = parseResourceScaleway(resv, tfsParsed)
+			host = parseResourceScaleway(resv)
 		}
 
 		// Add to hostvars or grouphost only if resource is
 		// supported and return a hostname with its ip
-		if hostname != "" {
+		if host != nil {
 			// In case of root path (no module used in Terraform)
 			if groupName == "" {
 				// Get group name
 				arr := strings.Split(resk, ".")
-				groupname = arr[1]
+				host.GroupName = arr[1]
+			} else {
+				host.GroupName = groupName
 			}
 
-			group, ok := tfsParsed.Groups[groupname]
-			if !ok {
-				group = &Group{
-					Vars:  make(map[string]interface{}),
-					Hosts: []string{},
-				}
-			}
+			hosts[host.Name] = host
 
-			group.Hosts = append(group.Hosts, hostname)
-			tfsParsed.Groups[groupname] = group
+			//group, ok := tfsParsed.Groups[groupname]
+			//if !ok {
+			//group = &Group{
+			//Vars:  make(map[string]interface{}),
+			//Hosts: []string{},
+			//}
+			//}
+
+			//group.Hosts = append(group.Hosts, hostname)
+			//tfsParsed.Groups[groupname] = group
 		}
 	}
+
+	return hosts
 }
 
 // Parse Module Outputs in tfstate and use the result as
 // group vars in ansible inventory
-func parseOutputs(groupName string, outputs map[string]Output, tfsParsed *TFStateParsed) {
+func parseOutputs(outputs map[string]Output) map[string]interface{} {
 	groupvars := make(map[string]interface{})
 
 	// Loop outputs
@@ -172,14 +222,18 @@ func parseOutputs(groupName string, outputs map[string]Output, tfsParsed *TFStat
 	// add groupvars to that specified group
 	// Otherwise, no terraform module in use (root)
 	// output variables will be for every groups
-	if groupName != "" {
-		group, ok := tfsParsed.Groups[groupName]
-		if ok {
-			group.Vars = groupvars
-		}
-	} else {
-		for _, group := range tfsParsed.Groups {
-			group.Vars = groupvars
-		}
-	}
+	//if groupName != "" {
+	//group, ok := tfsParsed.Groups[groupName]
+	//if ok {
+	//fmt.Println("groupvars", groupvars)
+	//fmt.Println("groupName", groupName)
+	//group.Vars = groupvars
+	//}
+	//} else {
+	//for _, group := range tfsParsed.Groups {
+	//group.Vars = groupvars
+	//}
+	//}
+
+	return groupvars
 }
