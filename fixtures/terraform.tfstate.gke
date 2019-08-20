@@ -1,0 +1,320 @@
+{
+    "version": 3,
+    "terraform_version": "0.11.7",
+    "serial": 4,
+    "lineage": "90b0afb1-5867-40ac-badb-a1315fc48e68",
+    "modules": [
+        {
+            "path": [
+                "root"
+            ],
+            "outputs": {},
+            "resources": {
+                "random_string.password": {
+                    "type": "random_string",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "none",
+                        "attributes": {
+                            "id": "none",
+                            "length": "16",
+                            "lower": "true",
+                            "min_lower": "0",
+                            "min_numeric": "0",
+                            "min_special": "0",
+                            "min_upper": "0",
+                            "number": "true",
+                            "result": "JBAY5aiAI%1@Jcw}",
+                            "special": "true",
+                            "upper": "true"
+                        },
+                        "meta": {
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.random"
+                }
+            },
+            "depends_on": []
+        },
+        {
+            "path": [
+                "root",
+                "gke-cluster"
+            ],
+            "outputs": {
+                "client_certificate": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": ""
+                },
+                "client_key": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": ""
+                },
+                "cluster_ca_certificate": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURERENDQWZTZ0F3SUJBZ0lSQVBSTkZQVjB4bFVxZmVRU00yc0pkNFV3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa01XUXpaakl6WkdFdE9ETTFaUzAwTWpBMExXSXpZekF0WVdOa05ERm1PRGc1T1dabApNQjRYRFRFNE1UQXlOekl4TXpBeE0xb1hEVEl6TVRBeU5qSXlNekF4TTFvd0x6RXRNQ3NHQTFVRUF4TWtNV1F6ClpqSXpaR0V0T0RNMVpTMDBNakEwTFdJell6QXRZV05rTkRGbU9EZzVPV1psTUlJQklqQU5CZ2txaGtpRzl3MEIKQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdGJkYWs0dGs5Y25wMkRSSmhrZjdXb3VqRWlwN0NoTzJYZ0RmWEtwKwoxUEtocXJzSlMrckdlazI2RXFVakFFSS9oSXZIME9EZm51bmVmc05aYmlDMk0zVWtZOTJFdXh6dW5XaXFpU0FmCkU1UGZVV3laaGtLcGYvY25DNmtkKzJiRDJQYndaNm1YeHA0T2U0bkJza3RCNHNMQ045UEtWZ3l4aWNCb3hzUzcKUDBDZHJtRlpYWEtacks3ZktLTzBGdVZ6ZmJjZVY2L3k4NVR1NkFkMEFyMGxldUhkNnRTT2JUUGRmRk5NWjhxcgp2QVErV2kyVGdkeWxHV1lNTThqRkJmNWJzMTVOanIrUjNWYXpRVUE4Ly9tZnFzb1hsczJoRVpqVTA5L3IzMWtZCk83bDhEVjBCeDdHNUh1QVRzalV4ZlJVVHluczIvZEJRdE9lbkoreWZ2ckV0OXdJREFRQUJveU13SVRBT0JnTlYKSFE4QkFmOEVCQU1DQWdRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQQpucGs0SlVQU2NUR0JVSUVvV1cvVVkzS2hrdXFEaHRBdUF1UFBDdG5CSkIxUTJGbVQ0RytTMUNDQlpydkg5c3ZzCk95d3RWZ3hhVzJkaG9LZ3k0aE1yTnBsOU9WNVBHNXh2U05aTHJXclFyY3pYaFBuNXFkMzIxMXlLYlExK0ZnTFcKOG9KYXZsc0dHdDNSTUVOOVZtcVE0SjJwQXhkTDZqOUpFUnhQdnRhS1cwcGZldURYZEFNZFdYdTRDT0tqV3V2Sgo2bnhOUVlRblRRSkhQOC9GNjJWQUxzT3pLR3psRlJaOWdxL2J3NXAvL2tMZVpRY1g2UE5uTy9DZnIwTm1hTFYzCmhSeFNSNGVxRkdURlVqQ1BjRXdVbDJYREg1Z2lWZzIvSUNoeGNCc05VbTFEUTF6YnFWa1NRN0lmVDlCaVNFb2sKbjdWbS8xMkg5WlppTUNsTm5LakIvdz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K"
+                },
+                "cluster_name": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "vpvloadtest-test-europe-west1-b-master"
+                },
+                "endpoint": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "35.187.106.206"
+                },
+                "gcr_url": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "gcr.io/modular-seeker-220509"
+                },
+                "instance_group_urls": {
+                    "sensitive": false,
+                    "type": "list",
+                    "value": [
+                        "https://www.googleapis.com/compute/v1/projects/modular-seeker-220509/zones/europe-west1-b/instanceGroups/gke-vpvloadtest-test-eur-default-pool-e4b15195-grp"
+                    ]
+                },
+                "maintenance_window": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "PT4H0M0S"
+                },
+                "master_version": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "1.10.7-gke.6"
+                },
+                "password": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "JBAY5aiAI%1@Jcw}"
+                },
+                "username": {
+                    "sensitive": false,
+                    "type": "string",
+                    "value": "admin"
+                }
+            },
+            "resources": {
+                "data.google_container_engine_versions.region": {
+                    "type": "google_container_engine_versions",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "2018-10-27 22:30:11.265051174 +0000 UTC",
+                        "attributes": {
+                            "default_cluster_version": "1.9.7-gke.6",
+                            "id": "2018-10-27 22:30:11.265051174 +0000 UTC",
+                            "latest_master_version": "1.10.7-gke.6",
+                            "latest_node_version": "1.10.7-gke.6",
+                            "valid_master_versions.#": "3",
+                            "valid_master_versions.0": "1.10.7-gke.6",
+                            "valid_master_versions.1": "1.10.6-gke.6",
+                            "valid_master_versions.2": "1.9.7-gke.6",
+                            "valid_node_versions.#": "38",
+                            "valid_node_versions.0": "1.10.7-gke.6",
+                            "valid_node_versions.1": "1.10.7-gke.2",
+                            "valid_node_versions.10": "1.10.5-gke.2",
+                            "valid_node_versions.11": "1.10.5-gke.0",
+                            "valid_node_versions.12": "1.10.4-gke.3",
+                            "valid_node_versions.13": "1.10.4-gke.2",
+                            "valid_node_versions.14": "1.10.4-gke.0",
+                            "valid_node_versions.15": "1.10.2-gke.4",
+                            "valid_node_versions.16": "1.10.2-gke.3",
+                            "valid_node_versions.17": "1.10.2-gke.1",
+                            "valid_node_versions.18": "1.9.7-gke.6",
+                            "valid_node_versions.19": "1.9.7-gke.5",
+                            "valid_node_versions.2": "1.10.7-gke.1",
+                            "valid_node_versions.20": "1.9.7-gke.4",
+                            "valid_node_versions.21": "1.9.7-gke.3",
+                            "valid_node_versions.22": "1.9.7-gke.1",
+                            "valid_node_versions.23": "1.9.7-gke.0",
+                            "valid_node_versions.24": "1.9.6-gke.2",
+                            "valid_node_versions.25": "1.9.6-gke.1",
+                            "valid_node_versions.26": "1.9.3-gke.0",
+                            "valid_node_versions.27": "1.8.12-gke.3",
+                            "valid_node_versions.28": "1.8.12-gke.2",
+                            "valid_node_versions.29": "1.8.12-gke.1",
+                            "valid_node_versions.3": "1.10.6-gke.6",
+                            "valid_node_versions.30": "1.8.12-gke.0",
+                            "valid_node_versions.31": "1.8.10-gke.2",
+                            "valid_node_versions.32": "1.8.10-gke.0",
+                            "valid_node_versions.33": "1.8.9-gke.1",
+                            "valid_node_versions.34": "1.8.8-gke.0",
+                            "valid_node_versions.35": "1.7.15-gke.0",
+                            "valid_node_versions.36": "1.7.12-gke.2",
+                            "valid_node_versions.37": "1.6.13-gke.1",
+                            "valid_node_versions.4": "1.10.6-gke.4",
+                            "valid_node_versions.5": "1.10.6-gke.3",
+                            "valid_node_versions.6": "1.10.6-gke.2",
+                            "valid_node_versions.7": "1.10.6-gke.1",
+                            "valid_node_versions.8": "1.10.5-gke.4",
+                            "valid_node_versions.9": "1.10.5-gke.3",
+                            "zone": "europe-west1-b"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.google"
+                },
+                "data.google_container_registry_repository.registry": {
+                    "type": "google_container_registry_repository",
+                    "depends_on": [],
+                    "primary": {
+                        "id": "gcr.io/modular-seeker-220509",
+                        "attributes": {
+                            "id": "gcr.io/modular-seeker-220509",
+                            "project": "modular-seeker-220509",
+                            "repository_url": "gcr.io/modular-seeker-220509"
+                        },
+                        "meta": {},
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.google"
+                },
+                "google_container_cluster.new_container_cluster": {
+                    "type": "google_container_cluster",
+                    "depends_on": [
+                        "data.google_container_engine_versions.region",
+                        "local.name_prefix"
+                    ],
+                    "primary": {
+                        "id": "vpvloadtest-test-europe-west1-b-master",
+                        "attributes": {
+                            "additional_zones.#": "0",
+                            "addons_config.#": "1",
+                            "addons_config.0.horizontal_pod_autoscaling.#": "1",
+                            "addons_config.0.horizontal_pod_autoscaling.0.disabled": "false",
+                            "addons_config.0.http_load_balancing.#": "1",
+                            "addons_config.0.http_load_balancing.0.disabled": "false",
+                            "addons_config.0.kubernetes_dashboard.#": "1",
+                            "addons_config.0.kubernetes_dashboard.0.disabled": "false",
+                            "addons_config.0.network_policy_config.#": "1",
+                            "addons_config.0.network_policy_config.0.disabled": "true",
+                            "cluster_ipv4_cidr": "10.56.0.0/14",
+                            "description": "Kubernetes vpvloadtest in europe-west1-b",
+                            "enable_binary_authorization": "false",
+                            "enable_kubernetes_alpha": "false",
+                            "enable_legacy_abac": "false",
+                            "enable_tpu": "false",
+                            "endpoint": "35.187.106.206",
+                            "id": "vpvloadtest-test-europe-west1-b-master",
+                            "initial_node_count": "2",
+                            "instance_group_urls.#": "1",
+                            "instance_group_urls.0": "https://www.googleapis.com/compute/v1/projects/modular-seeker-220509/zones/europe-west1-b/instanceGroups/gke-vpvloadtest-test-eur-default-pool-e4b15195-grp",
+                            "ip_allocation_policy.#": "0",
+                            "logging_service": "logging.googleapis.com",
+                            "maintenance_policy.#": "1",
+                            "maintenance_policy.0.daily_maintenance_window.#": "1",
+                            "maintenance_policy.0.daily_maintenance_window.0.duration": "PT4H0M0S",
+                            "maintenance_policy.0.daily_maintenance_window.0.start_time": "04:30",
+                            "master_auth.#": "1",
+                            "master_auth.0.client_certificate": "",
+                            "master_auth.0.client_certificate_config.#": "1",
+                            "master_auth.0.client_certificate_config.0.issue_client_certificate": "false",
+                            "master_auth.0.client_key": "",
+                            "master_auth.0.cluster_ca_certificate": "LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURERENDQWZTZ0F3SUJBZ0lSQVBSTkZQVjB4bFVxZmVRU00yc0pkNFV3RFFZSktvWklodmNOQVFFTEJRQXcKTHpFdE1Dc0dBMVVFQXhNa01XUXpaakl6WkdFdE9ETTFaUzAwTWpBMExXSXpZekF0WVdOa05ERm1PRGc1T1dabApNQjRYRFRFNE1UQXlOekl4TXpBeE0xb1hEVEl6TVRBeU5qSXlNekF4TTFvd0x6RXRNQ3NHQTFVRUF4TWtNV1F6ClpqSXpaR0V0T0RNMVpTMDBNakEwTFdJell6QXRZV05rTkRGbU9EZzVPV1psTUlJQklqQU5CZ2txaGtpRzl3MEIKQVFFRkFBT0NBUThBTUlJQkNnS0NBUUVBdGJkYWs0dGs5Y25wMkRSSmhrZjdXb3VqRWlwN0NoTzJYZ0RmWEtwKwoxUEtocXJzSlMrckdlazI2RXFVakFFSS9oSXZIME9EZm51bmVmc05aYmlDMk0zVWtZOTJFdXh6dW5XaXFpU0FmCkU1UGZVV3laaGtLcGYvY25DNmtkKzJiRDJQYndaNm1YeHA0T2U0bkJza3RCNHNMQ045UEtWZ3l4aWNCb3hzUzcKUDBDZHJtRlpYWEtacks3ZktLTzBGdVZ6ZmJjZVY2L3k4NVR1NkFkMEFyMGxldUhkNnRTT2JUUGRmRk5NWjhxcgp2QVErV2kyVGdkeWxHV1lNTThqRkJmNWJzMTVOanIrUjNWYXpRVUE4Ly9tZnFzb1hsczJoRVpqVTA5L3IzMWtZCk83bDhEVjBCeDdHNUh1QVRzalV4ZlJVVHluczIvZEJRdE9lbkoreWZ2ckV0OXdJREFRQUJveU13SVRBT0JnTlYKSFE4QkFmOEVCQU1DQWdRd0R3WURWUjBUQVFIL0JBVXdBd0VCL3pBTkJna3Foa2lHOXcwQkFRc0ZBQU9DQVFFQQpucGs0SlVQU2NUR0JVSUVvV1cvVVkzS2hrdXFEaHRBdUF1UFBDdG5CSkIxUTJGbVQ0RytTMUNDQlpydkg5c3ZzCk95d3RWZ3hhVzJkaG9LZ3k0aE1yTnBsOU9WNVBHNXh2U05aTHJXclFyY3pYaFBuNXFkMzIxMXlLYlExK0ZnTFcKOG9KYXZsc0dHdDNSTUVOOVZtcVE0SjJwQXhkTDZqOUpFUnhQdnRhS1cwcGZldURYZEFNZFdYdTRDT0tqV3V2Sgo2bnhOUVlRblRRSkhQOC9GNjJWQUxzT3pLR3psRlJaOWdxL2J3NXAvL2tMZVpRY1g2UE5uTy9DZnIwTm1hTFYzCmhSeFNSNGVxRkdURlVqQ1BjRXdVbDJYREg1Z2lWZzIvSUNoeGNCc05VbTFEUTF6YnFWa1NRN0lmVDlCaVNFb2sKbjdWbS8xMkg5WlppTUNsTm5LakIvdz09Ci0tLS0tRU5EIENFUlRJRklDQVRFLS0tLS0K",
+                            "master_auth.0.password": "JBAY5aiAI%1@Jcw}",
+                            "master_auth.0.username": "admin",
+                            "master_authorized_networks_config.#": "0",
+                            "master_ipv4_cidr_block": "10.0.0.0/28",
+                            "master_version": "1.10.7-gke.6",
+                            "min_master_version": "1.10.7-gke.6",
+                            "monitoring_service": "none",
+                            "name": "vpvloadtest-test-europe-west1-b-master",
+                            "network": "projects/modular-seeker-220509/global/networks/default",
+                            "network_policy.#": "1",
+                            "network_policy.0.enabled": "false",
+                            "network_policy.0.provider": "PROVIDER_UNSPECIFIED",
+                            "node_config.#": "1",
+                            "node_config.0.disk_size_gb": "10",
+                            "node_config.0.disk_type": "pd-standard",
+                            "node_config.0.guest_accelerator.#": "0",
+                            "node_config.0.image_type": "COS",
+                            "node_config.0.labels.%": "0",
+                            "node_config.0.local_ssd_count": "0",
+                            "node_config.0.machine_type": "n1-standard-1",
+                            "node_config.0.metadata.%": "0",
+                            "node_config.0.min_cpu_platform": "",
+                            "node_config.0.oauth_scopes.#": "4",
+                            "node_config.0.oauth_scopes.1277378754": "https://www.googleapis.com/auth/monitoring",
+                            "node_config.0.oauth_scopes.1632638332": "https://www.googleapis.com/auth/devstorage.read_only",
+                            "node_config.0.oauth_scopes.172152165": "https://www.googleapis.com/auth/logging.write",
+                            "node_config.0.oauth_scopes.299962681": "https://www.googleapis.com/auth/compute",
+                            "node_config.0.preemptible": "false",
+                            "node_config.0.service_account": "default",
+                            "node_config.0.tags.#": "0",
+                            "node_config.0.taint.#": "0",
+                            "node_config.0.workload_metadata_config.#": "1",
+                            "node_config.0.workload_metadata_config.0.node_metadata": "EXPOSE",
+                            "node_pool.#": "1",
+                            "node_pool.0.autoscaling.#": "0",
+                            "node_pool.0.initial_node_count": "2",
+                            "node_pool.0.instance_group_urls.#": "1",
+                            "node_pool.0.instance_group_urls.0": "https://www.googleapis.com/compute/v1/projects/modular-seeker-220509/zones/europe-west1-b/instanceGroupManagers/gke-vpvloadtest-test-eur-default-pool-e4b15195-grp",
+                            "node_pool.0.management.#": "1",
+                            "node_pool.0.management.0.auto_repair": "false",
+                            "node_pool.0.management.0.auto_upgrade": "false",
+                            "node_pool.0.max_pods_per_node": "0",
+                            "node_pool.0.name": "default-pool",
+                            "node_pool.0.name_prefix": "",
+                            "node_pool.0.node_config.#": "1",
+                            "node_pool.0.node_config.0.disk_size_gb": "10",
+                            "node_pool.0.node_config.0.disk_type": "pd-standard",
+                            "node_pool.0.node_config.0.guest_accelerator.#": "0",
+                            "node_pool.0.node_config.0.image_type": "COS",
+                            "node_pool.0.node_config.0.labels.%": "0",
+                            "node_pool.0.node_config.0.local_ssd_count": "0",
+                            "node_pool.0.node_config.0.machine_type": "n1-standard-1",
+                            "node_pool.0.node_config.0.metadata.%": "0",
+                            "node_pool.0.node_config.0.min_cpu_platform": "",
+                            "node_pool.0.node_config.0.oauth_scopes.#": "4",
+                            "node_pool.0.node_config.0.oauth_scopes.1277378754": "https://www.googleapis.com/auth/monitoring",
+                            "node_pool.0.node_config.0.oauth_scopes.1632638332": "https://www.googleapis.com/auth/devstorage.read_only",
+                            "node_pool.0.node_config.0.oauth_scopes.172152165": "https://www.googleapis.com/auth/logging.write",
+                            "node_pool.0.node_config.0.oauth_scopes.299962681": "https://www.googleapis.com/auth/compute",
+                            "node_pool.0.node_config.0.preemptible": "false",
+                            "node_pool.0.node_config.0.service_account": "default",
+                            "node_pool.0.node_config.0.tags.#": "0",
+                            "node_pool.0.node_config.0.taint.#": "0",
+                            "node_pool.0.node_config.0.workload_metadata_config.#": "1",
+                            "node_pool.0.node_config.0.workload_metadata_config.0.node_metadata": "EXPOSE",
+                            "node_pool.0.node_count": "2",
+                            "node_pool.0.version": "1.10.7-gke.6",
+                            "node_version": "1.10.7-gke.6",
+                            "pod_security_policy_config.#": "1",
+                            "pod_security_policy_config.0.enabled": "false",
+                            "private_cluster": "false",
+                            "project": "modular-seeker-220509",
+                            "remove_default_node_pool": "false",
+                            "resource_labels.%": "0",
+                            "subnetwork": "projects/modular-seeker-220509/regions/europe-west1/subnetworks/default",
+                            "zone": "europe-west1-b"
+                        },
+                        "meta": {
+                            "e2bfb730-ecaa-11e6-8f88-34363bc7c4c0": {
+                                "create": 1800000000000,
+                                "delete": 1800000000000,
+                                "update": 600000000000
+                            },
+                            "schema_version": "1"
+                        },
+                        "tainted": false
+                    },
+                    "deposed": [],
+                    "provider": "provider.google"
+                }
+            },
+            "depends_on": []
+        }
+    ]
+}

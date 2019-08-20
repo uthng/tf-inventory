@@ -1,0 +1,93 @@
+{
+  "_meta": {
+    "hostvars": {
+      "blog": {
+        "vars": {
+          "ansible_ssh_host": "111.222.333.5",
+          "boot_type": "local",
+          "enable_ipv6": "false",
+          "id": "bdxxd9b7-9235-4483-xx55-428930202197",
+          "image": "1e85f6fb-fe76-43xx-92c8-bxx3629ecexx",
+          "name": "blog",
+          "private_ip": "10.64.22.35",
+          "public_ip": "111.222.333.5",
+          "security_group": "693a10xx-f6c2-4fxx-xx1f-da69949095xx",
+          "state": "running",
+          "state_detail": "booting kernel",
+          "tags.#": "0",
+          "type": "DEV1-S"
+        }
+      },
+      "k8sm1": {
+        "vars": {
+          "ansible_ssh_host": "111.222.333.3",
+          "boot_type": "bootscript",
+          "enable_ipv6": "false",
+          "id": "xx94xx5d-4232-4d16-a3a4-0e9f02xxc85b",
+          "image": "63541xx1-8528-48f7-9cdf-c3f7f681xx30",
+          "name": "k8sm1",
+          "private_ip": "10.1.22.34",
+          "public_ip": "111.222.333.3",
+          "security_group": "e53cf4xx-88e9-4e81-b2xx-24821xxxx7ef",
+          "state": "running",
+          "state_detail": "booting kernel",
+          "tags.#": "0",
+          "type": "C2S"
+        }
+      },
+      "k8sm2": {
+        "vars": {
+          "ansible_ssh_host": "111.222.333.4",
+          "boot_type": "bootscript",
+          "enable_ipv6": "false",
+          "id": "077xx07d-e85d-4674-xxe6-bf5xx5857e6c",
+          "image": "63541xx1-8528-48f7-9cdf-c3f7f681xx30",
+          "name": "k8sm2",
+          "private_ip": "10.1.22.35",
+          "public_ip": "111.222.333.4",
+          "security_group": "e53cf4xx-88e9-4e81-b2xx-24821xxxx7ef",
+          "state": "running",
+          "state_detail": "booted",
+          "tags.#": "0",
+          "type": "C2S"
+        }
+      }
+    }
+  },
+  "all": {
+    "children": [
+      "blog",
+      "k8sm",
+      "ungrouped"
+    ]
+  },
+  "blog": {
+    "vars": {
+      "image": "1e85f6fb-fe76-43xx-92c8-bxx3629ecexx",
+      "security_group": "693a10xx-f6c2-4fxx-xx1f-da69949095xx",
+      "server_ids": [
+        "bdxxd9b7-9235-4483-xx55-428930202197"
+      ],
+      "type": "DEV1-S"
+    },
+    "hosts": [
+      "blog"
+    ]
+  },
+  "k8sm": {
+    "vars": {
+      "image": "63541xx1-8528-48f7-9cdf-c3f7f681xx30",
+      "security_group": "e53cf4xx-88e9-4e81-b2xx-24821xxxx7ef",
+      "server_ids": [
+        "xx94xx5d-4232-4d16-a3a4-0e9f02xxc85b",
+        "077xx07d-e85d-4674-xxe6-bf5xx5857e6c"
+      ],
+      "type": "C2S"
+    },
+    "hosts": [
+      "k8sm1",
+      "k8sm2"
+    ]
+  },
+  "ungrouped": {}
+}
