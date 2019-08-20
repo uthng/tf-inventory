@@ -1,5 +1,5 @@
 test:
-	go test -v $(shell go list ./... | grep -v /vendor/)
+	go test -v -count=1 $(shell go list ./... | grep -v /vendor/)
 
 build: clean
 	gox -osarch="linux/amd64 windows/amd64 darwin/amd64" \
