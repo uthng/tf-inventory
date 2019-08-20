@@ -1,0 +1,56 @@
+{
+  "_meta": {
+    "hostvars": {
+      "amq1-dc1-fr": {
+        "vars": {
+          "ansible_ssh_host": "10.155.137.25",
+          "hostname": "amq1-dc1-fr",
+          "memory": "65536",
+          "name": "amq1.dev.local.io",
+          "network_interface.#": "1",
+          "network_interface.0.ip_address": "",
+          "network_interface.0.ipv4_address": "10.155.137.25",
+          "network_interface.0.ipv4_gateway": "10.155.137.254",
+          "network_interface.0.ipv4_prefix_length": "24",
+          "network_interface.0.ipv6_prefix_length": "0",
+          "network_interface.0.mac_address": "00:50:56:92:fc:c8"
+        }
+      },
+      "cb1-dc1-fr": {
+        "vars": {
+          "ansible_ssh_host": "10.155.138.24",
+          "hostname": "cb1-dc1-fr",
+          "memory": "65536",
+          "name": "cb1.dev.local.io",
+          "network_interface.#": "1",
+          "network_interface.0.ip_address": "",
+          "network_interface.0.ipv4_address": "10.155.138.24",
+          "network_interface.0.ipv4_gateway": "10.155.138.254",
+          "network_interface.0.ipv4_prefix_length": "24",
+          "network_interface.0.ipv6_prefix_length": "0",
+          "network_interface.0.mac_address": "00:50:56:92:ae:c0"
+        }
+      }
+    }
+  },
+  "all": {
+    "children": [
+      "cb",
+      "amq",
+      "ungrouped"
+    ]
+  },
+  "amq": {
+    "vars": {},
+    "hosts": [
+      "amq1-dc1-fr"
+    ]
+  },
+  "cb": {
+    "vars": {},
+    "hosts": [
+      "cb1-dc1-fr"
+    ]
+  },
+  "ungrouped": {}
+}

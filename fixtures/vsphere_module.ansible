@@ -1,0 +1,87 @@
+{
+  "_meta": {
+    "hostvars": {
+      "gfs3": {
+        "vars": {
+          "ansible_ssh_host": "10.150.138.26",
+          "clone.0.customize.#": "1",
+          "clone.0.customize.0.dns_server_list.#": "2",
+          "clone.0.customize.0.dns_server_list.0": "10.42.1.1",
+          "clone.0.customize.0.dns_server_list.1": "10.42.2.2",
+          "clone.0.customize.0.dns_suffix_list.#": "2",
+          "clone.0.customize.0.dns_suffix_list.0": "local.io",
+          "clone.0.customize.0.ipv4_gateway": "10.150.138.254",
+          "clone.0.customize.0.ipv6_gateway": "",
+          "clone.0.customize.0.linux_options.#": "1",
+          "clone.0.customize.0.linux_options.0.domain": "prd.local.io",
+          "clone.0.customize.0.linux_options.0.host_name": "gfs3",
+          "clone.0.customize.0.linux_options.0.hw_clock_utc": "true",
+          "clone.0.customize.0.linux_options.0.time_zone": "",
+          "clone.0.customize.0.network_interface.#": "1",
+          "clone.0.customize.0.network_interface.0.dns_domain": "",
+          "clone.0.customize.0.network_interface.0.dns_server_list.#": "0",
+          "clone.0.customize.0.network_interface.0.ipv4_address": "10.150.138.26",
+          "clone.0.customize.0.network_interface.0.ipv4_netmask": "24",
+          "clone.0.customize.0.network_interface.0.ipv6_address": "",
+          "clone.0.customize.0.network_interface.0.ipv6_netmask": "0",
+          "clone.0.customize.0.timeout": "10",
+          "clone.0.template_uuid": "4212a5dc-52f3-5dd5-52cb-cc14a30922bd",
+          "datastore_id": "datastore-47690",
+          "default_ip_address": "10.150.138.26"
+        }
+      },
+      "gfs4": {
+        "vars": {
+          "ansible_ssh_host": "10.150.138.25",
+          "clone.0.customize.#": "1",
+          "clone.0.customize.0.dns_server_list.#": "2",
+          "clone.0.customize.0.dns_server_list.0": "10.42.1.1",
+          "clone.0.customize.0.dns_server_list.1": "10.42.2.2",
+          "clone.0.customize.0.dns_suffix_list.#": "2",
+          "clone.0.customize.0.dns_suffix_list.0": "local.io",
+          "clone.0.customize.0.ipv4_gateway": "10.150.138.254",
+          "clone.0.customize.0.ipv6_gateway": "",
+          "clone.0.customize.0.linux_options.#": "1",
+          "clone.0.customize.0.linux_options.0.domain": "prd.local.io",
+          "clone.0.customize.0.linux_options.0.host_name": "gfs4",
+          "clone.0.customize.0.linux_options.0.hw_clock_utc": "true",
+          "clone.0.customize.0.linux_options.0.time_zone": "",
+          "clone.0.customize.0.network_interface.#": "1",
+          "clone.0.customize.0.network_interface.0.dns_domain": "",
+          "clone.0.customize.0.network_interface.0.dns_server_list.#": "0",
+          "clone.0.customize.0.network_interface.0.ipv4_address": "10.150.138.25",
+          "clone.0.customize.0.network_interface.0.ipv4_netmask": "24",
+          "clone.0.customize.0.network_interface.0.ipv6_address": "",
+          "clone.0.customize.0.network_interface.0.ipv6_netmask": "0",
+          "clone.0.customize.0.timeout": "10",
+          "clone.0.template_uuid": "4212a5dc-52f3-5dd5-52cb-cc14a30922bd",
+          "datastore_id": "datastore-46898",
+          "default_ip_address": "10.150.138.25"
+        }
+      }
+    }
+  },
+  "all": {
+    "children": [
+      "vsphere-gfs",
+      "ungrouped"
+    ]
+  },
+  "ungrouped": {},
+  "vsphere-gfs": {
+    "vars": {
+      "vm_ids": [
+        "4212e637-577b-25f5-b600-1b3b06637e98",
+        "421232e0-2208-5b18-cfd5-814155e8c27d"
+      ],
+      "vm_names": [
+        "gfs3.prd.local.io.",
+        "gfs4.prd.local.io."
+      ]
+    },
+    "hosts": [
+      "gfs4",
+      "gfs3"
+    ]
+  }
+}
