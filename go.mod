@@ -15,6 +15,7 @@ require (
 	github.com/mitchellh/go-homedir v1.0.0
 	github.com/mitchellh/mapstructure v1.1.2
 	github.com/spf13/cast v1.2.0
+	github.com/stretchr/testify v1.4.0 // indirect
 	github.com/uthng/common v0.0.0-20180928203151-a8f3bf50de49
 	gopkg.in/alecthomas/kingpin.v2 v2.2.6
 )
